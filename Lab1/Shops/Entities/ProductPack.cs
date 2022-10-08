@@ -35,12 +35,7 @@ public class ProductPack
 
     public bool ProductExists(Guid id)
     {
-        if (_products.ContainsKey(id))
-        {
-            return true;
-        }
-
-        return false;
+        return _products.ContainsKey(id);
     }
 
     public void AddProduct(Product product, int count)
@@ -72,6 +67,11 @@ public class ProductPack
     public void ChangePrices(Dictionary<Guid, decimal> listOfPrices)
     {
         if (listOfPrices.Count != _products.Count || !_products.Keys.SequenceEqual(listOfPrices.Keys))
+        {
+            throw new IdException("Wrong pair of product and price");
+        }
+
+        if (_products.Count != listOfPrices.Count || !_products.Keys.SequenceEqual(listOfPrices.Keys))
         {
             throw new IdException("Wrong pair of product and price");
         }

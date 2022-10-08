@@ -24,7 +24,7 @@ public class Product
 
     public static bool operator ==(Product product1, Product product2)
     {
-        return product1.GetName() == product2.GetName() && product1.GetPrice() == product2.GetPrice();
+        return product1.GetName() == product2.GetName() && product1.GetId() == product2.GetId();
     }
 
     public static bool operator !=(Product product1, Product product2)
@@ -72,6 +72,6 @@ public class Product
 
     protected bool Equals(Product other)
     {
-        return _name == other._name && _id.Equals(other._id) && _price == other._price;
+        return _id == other._id && _name.Equals(other._name);
     }
 }

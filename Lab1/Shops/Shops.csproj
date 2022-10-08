@@ -10,6 +10,8 @@
 
     <ItemGroup>
         <None Include="..\..\.editorconfig" />
+        <None Remove="Services\**" />
+        <None Remove="Models\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,6 +19,17 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Services\**" />
+      <Compile Remove="Exceptions\ProductDoesNotExist.cs" />
+      <Compile Remove="Models\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Services\**" />
+      <EmbeddedResource Remove="Models\**" />
     </ItemGroup>
 
 </Project>

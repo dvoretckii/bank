@@ -51,7 +51,7 @@ public class Group
 
     public List<Student> GetStudents()
     {
-        List<Student> cp = _listOfStudents;
+        var cp = new List<Student>(_listOfStudents);
         return cp;
     }
 

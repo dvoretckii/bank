@@ -4,11 +4,11 @@ namespace Isu.Services;
 using Entities;
 using Models;
 
-public class ClassService : IIsuService
+public class IsuService : IIsuService
 {
     private List<Group> _groups;
 
-    public ClassService()
+    public IsuService()
     {
         _groups = new List<Group>();
     }

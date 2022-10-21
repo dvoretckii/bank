@@ -56,4 +56,10 @@ public class GroupName
         CourseNumber courseNumber = _courseNumber;
         return courseNumber;
     }
+
+    public char GetFaculty()
+    {
+        char cp = _faculty;
+        return cp;
+    }
 }

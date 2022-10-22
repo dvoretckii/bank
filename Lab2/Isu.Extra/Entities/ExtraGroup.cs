@@ -11,13 +11,6 @@ public class ExtraGroup
     private List<ExtraStudent> _students;
     private Schedule _schedule;
 
-    public ExtraGroup()
-    {
-        _group = new Group();
-        _schedule = new Schedule();
-        _students = new List<ExtraStudent>();
-    }
-
     public ExtraGroup(GroupName groupName, Schedule schedule)
     {
         _group = new Group(groupName);
@@ -49,7 +42,7 @@ public class ExtraGroup
 
     public void AddExtraStudent(ExtraStudent extraStudent)
     {
-        if (_group.GetStudents().Count == 20)
+        if (_group.GetStudents() !.Count == 20)
         {
             throw new ExtraGroupException("Can't add ExtraStudent. This ExtraGroup is full");
         }

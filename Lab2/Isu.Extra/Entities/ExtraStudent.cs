@@ -10,14 +10,6 @@ public class ExtraStudent
     private ExtraGroup _extraGroup;
     private List<Flow> _flows;
 
-    public ExtraStudent()
-    {
-        _student = new Student();
-        _schedule = new Schedule();
-        _extraGroup = new ExtraGroup();
-        _flows = new List<Flow>();
-    }
-
     public ExtraStudent(string name)
     {
         _student = new Student(name);

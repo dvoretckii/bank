@@ -1,3 +1,4 @@
+using Isu.Exceptions;
 using Isu.Models;
 
 namespace Isu.Entities;
@@ -12,6 +13,7 @@ public class Student
     {
         _name = name;
         _id = new StudentId();
+        group.AddStudent(this);
         _group = group;
     }
 
@@ -20,26 +22,19 @@ public class Student
         _group = group;
     }
 
-    public Group GetGroup()
-    {
-        Group cp = _group;
-        return cp;
-    }
+    public Group GetGroup() => _group;
 
-    public StudentId GetStudentId()
-    {
-        StudentId id = _id;
-        return id;
-    }
+    public StudentId GetStudentId() => _id;
 
-    public string GetName()
-    {
-        string name = _name;
-        return name;
-    }
+    public string GetName() => _name;
 
     public void ChangeStudentGroup(Group group)
     {
+        if (group.GetStudents() !.Count == 20)
+        {
+            throw new GroupException("Can't add student to this group. Group is full");
+        }
+
         GetGroup().DeleteStudent(this);
         group.AddStudent(this);
     }

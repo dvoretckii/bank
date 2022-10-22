@@ -16,8 +16,7 @@ public class IsuServiceTest : IsuService
         AddGroup(groupName);
         Group? group = FindGroup(groupName);
         if (group == null) return;
-        AddStudent(group, "vova");
-        Student vova = group.GetStudents() ![0];
+        var vova = new Student("vova", group);
 
         Assert.Equal(group, vova.GetGroup());
         Assert.Contains(vova, group.GetStudents());
@@ -63,7 +62,7 @@ public class IsuServiceTest : IsuService
         Group? group1 = FindGroup(groupName1);
         Group? group2 = FindGroup(groupName2);
         if (group1 == null) return;
-        Student vova = AddStudent(group1, "VOVA");
+        var vova = new Student("vova", group1);
         if (group2 == null) return;
         ChangeStudentGroup(vova, group2);
         Assert.Equal(group2, vova.GetGroup());

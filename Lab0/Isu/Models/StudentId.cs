@@ -11,9 +11,5 @@ public class StudentId
         _currentId++;
     }
 
-    public int GetStudentID()
-    {
-        int id = _id;
-        return id;
-    }
+    public int GetStudentID() => _id;
 }

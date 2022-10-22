@@ -39,15 +39,7 @@ public class Group
         }
     }
 
-    public List<Student>? GetStudents()
-    {
-        var cp = new List<Student>(_listOfStudents);
-        return cp;
-    }
+    public List<Student>? GetStudents() => _listOfStudents;
 
-    public GroupName GetGroupName()
-    {
-        GroupName groupName = _groupName;
-        return groupName;
-    }
+    public GroupName GetGroupName() => _groupName;
 }

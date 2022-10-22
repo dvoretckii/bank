@@ -37,21 +37,9 @@ public class GroupName
         _groupNumber = groupNumber;
     }
 
-    public string GetGroupName()
-    {
-        string name = _faculty + _studyForm + _courseNumber.GetCourseNumber() + _groupNumber;
-        return name;
-    }
+    public string GetGroupName() => _faculty + _studyForm + _courseNumber.GetCourseNumber() + _groupNumber;
 
-    public CourseNumber GetCourseNumber()
-    {
-        CourseNumber courseNumber = _courseNumber;
-        return courseNumber;
-    }
+    public CourseNumber GetCourseNumber() => _courseNumber;
 
-    public char GetFaculty()
-    {
-        char cp = _faculty;
-        return cp;
-    }
+    public char GetFaculty() => _faculty;
 }

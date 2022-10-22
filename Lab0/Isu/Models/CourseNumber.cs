@@ -21,8 +21,5 @@ public class CourseNumber
         _courseNumber = '\0';
     }
 
-    public char GetCourseNumber()
-    {
-        return _courseNumber;
-    }
+    public char GetCourseNumber() => _courseNumber;
 }

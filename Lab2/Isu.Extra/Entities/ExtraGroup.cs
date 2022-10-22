@@ -25,22 +25,11 @@ public class ExtraGroup
         _students = extraGroup._students;
     }
 
-    public Group GetGroup()
-    {
-        return _group;
-    }
+    public Group GetGroup() => _group;
 
-    public List<ExtraStudent> GetExtraStudents()
-    {
-        var students = new List<ExtraStudent>(_students);
-        return students;
-    }
+    public List<ExtraStudent> GetExtraStudents() => _students;
 
-    public Schedule GetGroupSchedule()
-    {
-        var schedule = new Schedule(_schedule);
-        return schedule;
-    }
+    public Schedule GetGroupSchedule() => _schedule;
 
     public void SetGroupSchedule(Schedule schedule)
     {

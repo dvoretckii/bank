@@ -24,11 +24,7 @@ public class ExtraStudent
         return student;
     }
 
-    public Schedule GetStudentSchedule()
-    {
-        var schedule = new Schedule(_schedule);
-        return schedule;
-    }
+    public Schedule GetStudentSchedule() => _schedule;
 
     public ExtraGroup GetExtraGroup()
     {

@@ -113,6 +113,15 @@ public class IsuExtra : IsuService, IIsuExtra
 
     public List<ExtraStudent> GetStudentsWithoutAnyAdditionalSubject(ExtraGroup group)
     {
-        return group.GetExtraStudents().Where(student => student.GetFlows().Count == 0).ToList();
+        var students = new List<ExtraStudent>();
+        foreach (ExtraStudent student in group.GetExtraStudents())
+        {
+            if (student.GetFlows().Count == 0)
+            {
+                students.Add(student);
+            }
+        }
+
+        return students;
     }
 }

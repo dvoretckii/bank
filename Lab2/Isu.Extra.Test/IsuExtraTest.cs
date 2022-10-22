@@ -67,8 +67,7 @@ public class IsuExtraTest : IsuService
         var groupSchedule = new Schedule(groupLessons);
         var group = new ExtraGroup(groupName, groupSchedule);
         string name = "pasha";
-        var student = new ExtraStudent(name);
-        group.AddExtraStudent(student);
+        var student = new ExtraStudent(name, group);
         isu.AssignAdditionalSubjectToStudent(student, additionalSubject);
         Assert.Contains(flow, student.GetFlows());
     }
@@ -107,8 +106,7 @@ public class IsuExtraTest : IsuService
         var groupSchedule = new Schedule(groupLessons);
         var group = new ExtraGroup(groupName, groupSchedule);
         string name = "pasha";
-        var student = new ExtraStudent(name);
-        group.AddExtraStudent(student);
+        var student = new ExtraStudent(name, group);
         isu.AssignAdditionalSubjectToStudent(student, additionalSubject);
         isu.DeleteStudentFromAdditionalSubject(student, additionalSubject);
         Assert.DoesNotContain(flow, student.GetFlows());
@@ -170,8 +168,7 @@ public class IsuExtraTest : IsuService
         var groupSchedule = new Schedule(groupLessons);
         var group = new ExtraGroup(groupName, groupSchedule);
         string name = "pasha";
-        var student = new ExtraStudent(name);
-        group.AddExtraStudent(student);
+        var student = new ExtraStudent(name, group);
         isu.AssignAdditionalSubjectToStudent(student, additionalSubject);
         var students = new List<ExtraStudent>();
         students.Add(student);
@@ -212,14 +209,10 @@ public class IsuExtraTest : IsuService
         var groupSchedule = new Schedule(groupLessons);
         var group = new ExtraGroup(groupName, groupSchedule);
         string name = "pasha";
-        var student = new ExtraStudent(name);
-        string mashaName = "masha";
-        var masha = new ExtraStudent(mashaName);
-        group.AddExtraStudent(student);
-        group.AddExtraStudent(masha);
-        isu.AssignAdditionalSubjectToStudent(masha, additionalSubject);
+        var student = new ExtraStudent(name, group);
         var students = new List<ExtraStudent>();
         students.Add(student);
+        group.AddExtraStudent(student);
         Assert.Equal(students, isu.GetStudentsWithoutAnyAdditionalSubject(group));
     }
 }

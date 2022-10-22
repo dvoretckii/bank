@@ -10,11 +10,11 @@ public class ExtraStudent
     private ExtraGroup _extraGroup;
     private List<Flow> _flows;
 
-    public ExtraStudent(string name)
+    public ExtraStudent(string name, ExtraGroup extraGroup)
     {
-        _student = new Student(name);
+        _student = new Student(name, extraGroup.GetGroup());
         _schedule = new Schedule();
-        _extraGroup = new ExtraGroup();
+        _extraGroup = new ExtraGroup(extraGroup);
         _flows = new List<Flow>();
     }
 

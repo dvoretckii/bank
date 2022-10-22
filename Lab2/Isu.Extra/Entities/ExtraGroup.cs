@@ -18,6 +18,18 @@ public class ExtraGroup
         _students = new List<ExtraStudent>();
     }
 
+    public ExtraGroup(ExtraGroup extraGroup)
+    {
+        _group = extraGroup._group;
+        _schedule = extraGroup._schedule;
+        _students = extraGroup._students;
+    }
+
+    public Group GetGroup()
+    {
+        return _group;
+    }
+
     public List<ExtraStudent> GetExtraStudents()
     {
         var students = new List<ExtraStudent>(_students);

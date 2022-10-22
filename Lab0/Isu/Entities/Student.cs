@@ -8,20 +8,6 @@ public class Student
     private StudentId _id;
     private Group _group;
 
-    public Student()
-    {
-        _name = string.Empty;
-        _id = new StudentId();
-        _group = new Group();
-    }
-
-    public Student(string name)
-    {
-        _name = name;
-        _id = new StudentId();
-        _group = new Group();
-    }
-
     public Student(string name, Group group)
     {
         _name = name;
@@ -50,5 +36,11 @@ public class Student
     {
         string name = _name;
         return name;
+    }
+
+    public void ChangeStudentGroup(Group group)
+    {
+        GetGroup().DeleteStudent(this);
+        group.AddStudent(this);
     }
 }

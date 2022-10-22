@@ -8,11 +8,6 @@ public class Group
     private GroupName _groupName;
     private List<Student> _listOfStudents;
     private int _maxNumberOfStudents = 20;
-    public Group()
-    {
-        _groupName = new GroupName();
-        _listOfStudents = new List<Student>();
-    }
 
     public Group(GroupName groupName)
     {
@@ -27,29 +22,24 @@ public class Group
             throw new StudentException("The group is full. Service can not add student");
         }
 
+        if (_listOfStudents.Contains(student))
+        {
+            throw new StudentException("Student already in the group");
+        }
+
         _listOfStudents.Add(student);
         student.SetGroup(this);
     }
 
-    public void AddStudents(List<Student> students)
-    {
-        foreach (Student student in students)
-        {
-            AddStudent(student);
-        }
-    }
-
     public void DeleteStudent(Student student)
     {
-        if (!_listOfStudents.Contains(student))
+        if (!_listOfStudents.Remove(student))
         {
             throw new GroupException("No such student in this group");
         }
-
-        _listOfStudents.Remove(student);
     }
 
-    public List<Student> GetStudents()
+    public List<Student>? GetStudents()
     {
         var cp = new List<Student>(_listOfStudents);
         return cp;

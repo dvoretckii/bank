@@ -17,7 +17,7 @@ public class IsuServiceTest : IsuService
         Group? group = FindGroup(groupName);
         if (group == null) return;
         AddStudent(group, "vova");
-        Student vova = group.GetStudents()[0];
+        Student vova = group.GetStudents() ![0];
 
         Assert.Equal(group, vova.GetGroup());
         Assert.Contains(vova, group.GetStudents());

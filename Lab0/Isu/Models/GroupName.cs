@@ -9,14 +9,6 @@ public class GroupName
     private CourseNumber _courseNumber;
     private string _groupNumber;
 
-    public GroupName()
-    {
-        _faculty = '\0';
-        _studyForm = '\0';
-        _courseNumber = new CourseNumber();
-        _groupNumber = string.Empty;
-    }
-
     public GroupName(char faculty, char studyForm, CourseNumber courseNumber, string groupNumber)
     {
         const string lettersAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";

@@ -1,4 +1,5 @@
-﻿using Banks.Interfaces;
+﻿using Banks.Exceptions;
+using Banks.Interfaces;
 using Banks.Models;
 
 namespace Banks.Entities;
@@ -50,7 +51,7 @@ public class CreditBankAccount : IBankAccount
     {
         if (SumOfMoney - moneySum < 0 && moneySum - SumOfMoney > CreditLimit)
         {
-            throw new Exception();
+            throw BankException.InvalidOperation();
         }
 
         SumOfMoney -= moneySum;
@@ -69,7 +70,7 @@ public class CreditBankAccount : IBankAccount
     {
         if (SumOfMoney - (SumOfMoney * CreditComission / 100) < 0 && (SumOfMoney * CreditComission / 100) - SumOfMoney > CreditLimit)
         {
-            throw new Exception();
+            throw BankException.InvalidOperation();
         }
 
         if (SumOfMoney < 0)

@@ -1,4 +1,5 @@
 ﻿using System.Transactions;
+using Banks.Exceptions;
 using Banks.Interfaces;
 
 namespace Banks.Models;
@@ -25,7 +26,7 @@ public class CancelTransaction : ITransaction
     {
         if (DependentTransaction!.StatusOfCancelling)
         {
-            throw new Exception();
+            throw BankException.InvalidOperation();
         }
 
         Sender.SumOfMoney -= TransactionSum;

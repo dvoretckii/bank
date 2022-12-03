@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Banks.Entities;
+using Banks.Exceptions;
 using Banks.Models;
 using Banks.Services;
 namespace Banks.Console;
@@ -137,7 +138,7 @@ public class ConsoleProgram
                                 {
                                     Bank bank = centralBank.FindBank(nameBank);
                                     System.Console.WriteLine("What type of bank? Credit/Debit/Deposit");
-                                    string type = System.Console.ReadLine() ?? throw new InvalidOperationException();
+                                    string type = System.Console.ReadLine() ?? throw BankException.NullableVariable();
                                     BankAccountType accountType = BankAccountType.Credit;
                                     if (type == "Credit")
                                     {
@@ -153,7 +154,7 @@ public class ConsoleProgram
                                     }
                                     else
                                     {
-                                        throw new Exception();
+                                        throw BankException.InvalidOperation();
                                     }
 
                                     System.Console.WriteLine("What sum of account?");
@@ -195,7 +196,7 @@ public class ConsoleProgram
                                     clients.Add(client);
                                     Bank bank = centralBank.FindBank(nameBank);
                                     System.Console.WriteLine("What type of bank? Credit/Debit/Deposit");
-                                    string type = System.Console.ReadLine() ?? throw new InvalidOperationException();
+                                    string type = System.Console.ReadLine() ?? throw BankException.NullableVariable();
                                     System.Console.WriteLine("What sum of account?");
                                     int sum = Convert.ToInt32(System.Console.ReadLine());
                                     var accountType = BankAccountType.Credit;
@@ -213,7 +214,7 @@ public class ConsoleProgram
                                     }
                                     else
                                     {
-                                        throw new Exception();
+                                        throw BankException.NullableVariable();
                                     }
 
                                     bank.OpenBankAccount(client, sum, accountType);

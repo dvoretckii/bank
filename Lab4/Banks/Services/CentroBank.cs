@@ -1,5 +1,6 @@
 ﻿using System.Transactions;
 using Banks.Entities;
+using Banks.Exceptions;
 using Banks.Interfaces;
 using Banks.Models;
 
@@ -24,7 +25,7 @@ public class CentroBank
             }
         }
 
-        throw new Exception();
+        throw BankException.ElementNotFound();
     }
 
     public Bank FindBankWithAccountId(string accountId)
@@ -37,7 +38,7 @@ public class CentroBank
             }
         }
 
-        throw new Exception();
+        throw BankException.ElementNotFound();
     }
 
     public ITransaction CreateTransaction(ITransaction? dependentTransaction, IBankAccount receiver, IBankAccount sender, decimal transactionSum, TransactionType transactionType)
@@ -120,6 +121,6 @@ public class CentroBank
             }
         }
 
-        throw new Exception();
+        throw BankException.ElementNotFound();
     }
 }

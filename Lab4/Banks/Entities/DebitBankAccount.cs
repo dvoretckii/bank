@@ -1,4 +1,5 @@
-﻿using Banks.Interfaces;
+﻿using Banks.Exceptions;
+using Banks.Interfaces;
 using Banks.Models;
 
 namespace Banks.Entities;
@@ -50,7 +51,7 @@ public class DebitBankAccount : IBankAccount
     {
         if (moneySum > SumOfMoney)
         {
-            throw new Exception();
+            throw BankException.InvalidOperation();
         }
 
         SumOfMoney -= moneySum;

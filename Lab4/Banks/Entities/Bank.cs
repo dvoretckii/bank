@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Banks.Exceptions;
 using Banks.Interfaces;
 using Banks.Models;
 using Banks.Services;
@@ -47,7 +48,7 @@ public class Bank : IObservable
         var newList = new List<IObserver>(Clients);
         if (newList.Contains(observer))
         {
-            throw new Exception();
+            throw BankException.ElementNotFound();
         }
 
         newList.Add(observer);
@@ -59,7 +60,7 @@ public class Bank : IObservable
         var newList = new List<IObserver>(Clients);
         if (!newList.Contains(observer))
         {
-            throw new Exception();
+            throw BankException.ElementNotFound();
         }
 
         newList.Remove(observer);

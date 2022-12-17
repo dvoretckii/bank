@@ -22,13 +22,25 @@ public class ConsoleProgram
             {
                 case "1":
                     System.Console.WriteLine(
-                        "Input: name, commission to transfer, commission for credit account, limit for credit account, commission for debit account, limit for suspicious, account validity period");
+                        "Input: name");
                     string? name = System.Console.ReadLine();
+                    System.Console.WriteLine(
+                        "Input: commission to transfer");
                     int transactionComission = Convert.ToInt32(System.Console.ReadLine());
+                    System.Console.WriteLine(
+                        "Input: debit comission");
                     int debitComission = Convert.ToInt32(System.Console.ReadLine());
+                    System.Console.WriteLine(
+                        "Input: credit comission");
                     int creditComission = Convert.ToInt32(System.Console.ReadLine());
+                    System.Console.WriteLine(
+                        "Input: credit limit");
                     decimal creditLimit = Convert.ToDecimal(System.Console.ReadLine());
+                    System.Console.WriteLine(
+                        "Input: amount Limiting Suspicious Client");
                     decimal amountLimitingSuspiciousClient = Convert.ToDecimal(System.Console.ReadLine());
+                    System.Console.WriteLine(
+                        "Input: validity period");
                     int accountValidityPeriod = Convert.ToInt32(System.Console.ReadLine());
                     System.Console.WriteLine("Input: number of control points in debit commission");
                     int controlPointsNumber = Convert.ToInt32(System.Console.ReadLine());
@@ -52,8 +64,9 @@ public class ConsoleProgram
 
                     break;
                 case "2":
-                    System.Console.WriteLine("Input name, sername, address, passport");
+                    System.Console.WriteLine("Input name");
                     name = System.Console.ReadLine();
+                    System.Console.WriteLine("Input sername");
                     string? sername = System.Console.ReadLine();
                     string? address = null;
                     int passport = 0;

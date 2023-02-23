@@ -24,13 +24,13 @@ public class CancelTransaction : ITransaction
     public decimal TransactionSum { get; set; }
     public void MakeTransaction()
     {
-        if (DependentTransaction!.StatusOfCancelling)
+        if (DependentTransaction?.StatusOfCancelling is true)
         {
             throw BankException.InvalidOperation();
         }
 
         Sender.SumOfMoney -= TransactionSum;
         Receiver.SumOfMoney += TransactionSum;
-        DependentTransaction.StatusOfCancelling = true;
+        if (DependentTransaction != null) DependentTransaction.StatusOfCancelling = true;
     }
 }

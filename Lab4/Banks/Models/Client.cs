@@ -28,7 +28,7 @@ public class Client : IObserver
     public string? Surname { get; private set; }
     public string? Address { get; set; }
     public IReadOnlyList<IBankAccount>? Accounts { get; private set; }
-    public IReadOnlyList<string>? Messages { get; private set; }
+    public List<string?>? Messages { get; private set; }
 
     public int PassportNumber
     {
@@ -48,26 +48,6 @@ public class Client : IObserver
         }
     }
 
-    public static bool operator ==(Client client1, Client client2)
-    {
-        if (client1.Name == client2.Name && client1.Surname == client2.Surname)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public static bool operator !=(Client client1, Client client2)
-    {
-        if (client1.Name != client2.Name || client1.Surname != client2.Surname)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public void Update(object obj)
     {
         var newList = new List<string?>();
@@ -77,7 +57,7 @@ public class Client : IObserver
         }
 
         newList.Add(obj.ToString());
-        Messages = newList!;
+        Messages = newList;
     }
 
     public void AddAccount(IBankAccount account)
@@ -94,30 +74,7 @@ public class Client : IObserver
 
     public bool SuspicionOfAttacker()
     {
-        if (Address is null || PassportNumber == 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
-        return Equals((Client)obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Name, Surname, Address, Accounts);
-    }
-
-    protected bool Equals(Client other)
-    {
-        return Name == other.Name && Surname == other.Surname && Address == other.Address && Equals(Accounts, other.Accounts);
+        return Address is null || PassportNumber == 0;
     }
 
     private class ClientBuilder : INameBuilder, ISurnameBuilder, IClientBuilder
@@ -156,7 +113,7 @@ public class Client : IObserver
         public Client Build()
         {
             _client.Accounts = new List<IBankAccount>();
-            _client.Messages = new List<string>();
+            _client.Messages = new List<string?>();
             return _client;
         }
     }

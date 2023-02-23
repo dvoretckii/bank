@@ -20,28 +20,21 @@ public class Bank : IObservable
         CreditComission = creditComission;
         CreditLimit = creditLimit;
         BankName = bankName;
-        InfoBank = new Info(this);
         AmountLimitingSuspiciousClient = amountLimitingSuspiciousClient;
     }
 
+    // убрать сетеры сделать указатель публичный ридонли на приватный
     public string BankId { get; }
     public string BankName { get; }
-    public IReadOnlyList<IBankAccount> Accounts { get; set; }
-    public IReadOnlyList<IObserver> Clients { get; set; }
+    public IReadOnlyList<IBankAccount> Accounts { get; private set; }
+    public IReadOnlyList<IObserver> Clients { get; private set; }
     public decimal AmountLimitingSuspiciousClient { get; private set; }
     public int AccountValidityPeriod { get; }
-    public int DebitComission { get; set; }
-    public int CreditComission { get; set; }
-    public IReadOnlyList<KeyValuePair<decimal, int>> DepositComissions { get; set; }
-    public decimal CreditLimit { get; set; }
-    public int TransactionCommission { get; set; }
-
-    public Info InfoBank { get; private set; }
-
-    public void UpdateInfo()
-    {
-        var newInfo = new Info(this);
-    }
+    public int DebitComission { get;  private set; }
+    public int CreditComission { get; private set; }
+    public IReadOnlyList<KeyValuePair<decimal, int>> DepositComissions { get; }
+    public decimal CreditLimit { get; private set; }
+    public int TransactionCommission { get; private set; }
 
     public void RegisterObserver(IObserver observer)
     {
@@ -69,26 +62,10 @@ public class Bank : IObservable
 
     public void NotifyObservers()
     {
-        Info oldInfo = new Info(InfoBank);
-        UpdateInfo();
+        var info = new Info(this);
         foreach (Client observer in Clients)
         {
-            if (observer.Accounts != null && oldInfo.DebitComissionInfo.ToString() != InfoBank.DebitComissionInfo.ToString() && observer.Accounts.OfType<DebitBankAccount>().Any())
-            {
-                observer.Update(InfoBank.SendMessage());
-            }
-            else if (observer.Accounts != null && oldInfo.CreditComissionInfo.ToString() != InfoBank.CreditComissionInfo.ToString() && oldInfo.CreditLimitInfo != InfoBank.CreditLimitInfo && observer.Accounts.OfType<CreditBankAccount>().Any())
-            {
-                observer.Update(InfoBank.SendMessage());
-            }
-            else if (observer.Accounts != null && oldInfo.DepositComissionsInfo != InfoBank.DepositComissionsInfo && observer.Accounts.OfType<DepositBankAccount>().Any())
-            {
-                observer.Update(InfoBank.SendMessage());
-            }
-            else
-            {
-                observer.Update(InfoBank.SendMessage());
-            }
+            observer.Update(info);
         }
     }
 
@@ -116,13 +93,6 @@ public class Bank : IObservable
     {
         CreditLimit = newCreditLimit;
         CreditBankAccount();
-        NotifyObservers();
-    }
-
-    public void ChangeDepositComissions(IReadOnlyList<KeyValuePair<decimal, int>> newDepositComissions)
-    {
-        DepositComissions = newDepositComissions;
-        DepositBankAccount();
         NotifyObservers();
     }
 
@@ -158,19 +128,6 @@ public class Bank : IObservable
         {
             debit.DepositComissions = DepositComissions;
         }
-    }
-
-    public IBankAccount? FindBankAccount(string accountId)
-    {
-        foreach (IBankAccount bankAccount in Accounts)
-        {
-            if (bankAccount.AccountId == accountId)
-            {
-                return bankAccount;
-            }
-        }
-
-        return null;
     }
 
     public void AddAccount(IBankAccount account)
@@ -215,48 +172,4 @@ public class Bank : IObservable
             bankAccount.RunTimePeriod(months);
         }
     }
-
-    public class Info
-    {
-        public Info(Bank bank)
-        {
-            Bank = bank;
-            CommissionToTransferInfo = bank.TransactionCommission;
-            DebitComissionInfo = bank.DebitComission;
-            CreditComissionInfo = bank.CreditComission;
-            CreditLimitInfo = bank.CreditLimit;
-            DepositComissionsInfo = bank.DepositComissions;
-            AmountLimitingSuspiciousClientInfo = bank.AmountLimitingSuspiciousClient;
-        }
-
-        public Info(Info info)
-        {
-            Bank = info.Bank;
-            CommissionToTransferInfo = info.CommissionToTransferInfo;
-            DebitComissionInfo = info.DebitComissionInfo;
-            CreditComissionInfo = info.CreditComissionInfo;
-            CreditLimitInfo = info.CreditLimitInfo;
-            DepositComissionsInfo = info.DepositComissionsInfo;
-            AmountLimitingSuspiciousClientInfo = info.AmountLimitingSuspiciousClientInfo;
-        }
-
-        public Bank Bank { get; }
-        public float CommissionToTransferInfo { get; private set; }
-        public float DebitComissionInfo { get; private set; }
-        public float CreditComissionInfo { get; private set; }
-        public decimal CreditLimitInfo { get; private set; }
-        public IReadOnlyList<KeyValuePair<decimal, int>> DepositComissionsInfo { get; private set; }
-        public decimal AmountLimitingSuspiciousClientInfo { get; private set; }
-
-        public string InfoToString()
-        {
-            return $"CommissionToTransferInfo - {CommissionToTransferInfo}\nDebitComissionInfo - {DebitComissionInfo}\nCreditComissionInfo - {CreditComissionInfo}\nCreditLimitInfo - {CreditLimitInfo}\nDepositComissionsInfo - {DepositComissionsInfo}\nAmountLimitingSuspiciousClientInfo - {AmountLimitingSuspiciousClientInfo}";
-        }
-
-        public string SendMessage()
-        {
-            return
-                $"The bank's {Bank.BankName} ({Bank.BankId}) policy has changed. Check out the new terms of use of accounts:\n{InfoToString()}";
-        }
-    }
-    }
+}
